@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="dashboard-body">
 
-<div class="dashboard-container glass">
+<body>
+    <div class="dashboard-container">
 
-    <h2 class="welcome">Welcome, {{ name }}</h2>
+        <div class="welcome-card">
+            <h2>Welcome, {{ student.name }}</h2>
+            <p>Your performance summary is shown below.</p>
+        </div>
 
-    {% for exam in exams %}
-    <div class="exam-card glass">
-        <h3 class="exam-title">{{ exam.exam_name }}</h3>
-        <p class="exam-id">Exam ID: {{ exam.exam_id }}</p>
+        {% if results %}
+            {% for exam in results %}
+                <div class="exam-card">
+                    <h3>{{ exam.exam_name }}</h3>
 
-        <table class="marks-table">
-            <tr>
-                <th>Subject</th>
-                <th>Marks</th>
-            </tr>
-            <tr>
-                <td>Math</td>
-                <td>{{ exam.scores.math }}</td>
-            </tr>
-            <tr>
-                <td>Physics</td>
-                <td>{{ exam.scores.physics }}</td>
-            </tr>
-            <tr>
-                <td>Chemistry</td>
-                <td>{{ exam.scores.chemistry }}</td>
-            </tr>
-            <tr class="total-row">
-                <td>Total</td>
-                <td>{{ exam.scores.math + exam.scores.physics + exam.scores.chemistry }}</td>
-            </tr>
-        </table>
+                    <!-- Marks Table -->
+                    <table class="marks-table">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                        </tr>
+                        {% for subject, mark in exam.marks.items() %}
+                        <tr>
+                            <td>{{ subject }}</td>
+                            <td>{{ mark }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                    <p class="total-score">Total Score: {{ exam.total }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-results">No results found.</p>
+        {% endif %}
+
+        <a class="logout-btn" href="/logout">Logout</a>
     </div>
-    {% endfor %}
-
-    <a href="/logout" class="logout-btn">Logout</a>
-
-</div>
 
 </body>
 </html>
