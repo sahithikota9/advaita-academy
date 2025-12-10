@@ -1,0 +1,130 @@
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ----- LOGIN PAGE ----- */
+
+.login-body {
+    background: linear-gradient(135deg, #b58aff, #d9b3ff);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 330px;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.title {
+    color: white;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #6b29ff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.error {
+    color: #ffcccc;
+    margin-bottom: 10px;
+}
+
+/* ----- DASHBOARD ----- */
+
+.dashboard-body {
+    background: linear-gradient(135deg, #a470ff, #caa8ff);
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.dashboard-container {
+    max-width: 700px;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.welcome {
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+.exam-card {
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+.exam-title {
+    margin: 0;
+    color: white;
+    font-size: 22px;
+}
+
+.exam-id {
+    color: #e6d8ff;
+    margin-bottom: 15px;
+}
+
+.marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: white;
+    font-size: 16px;
+}
+
+.marks-table th, .marks-table td {
+    padding: 10px;
+}
+
+.marks-table tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.total-row {
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.logout-btn {
+    display: block;
+    width: 100px;
+    margin: 25px auto;
+    padding: 10px;
+    text-align: center;
+    background: #6b29ff;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+/* --- Glass Effect --- */
+
+.glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
