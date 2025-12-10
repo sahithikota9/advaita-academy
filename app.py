@@ -4,11 +4,11 @@ import json
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
-# Load students
+# Load students (students.json is a LIST, not an object)
 with open("students.json", "r") as f:
-    students_data = json.load(f)["students"]
+    students_data = json.load(f)
 
-# Load exam results
+# Load exam results (also a LIST)
 with open("results.json", "r") as f:
     results_data = json.load(f)
 
@@ -19,12 +19,14 @@ def login():
         username = request.form["username"].strip()
         password = request.form["password"].strip()
 
+        # Check username & password
         for student in students_data:
             if student["username"] == username and student["password"] == password:
                 session["username"] = username
                 session["name"] = student["name"]
                 return redirect("/dashboard")
 
+        # Wrong credentials → show error
         return render_template("login.html", error="Invalid username or password.")
 
     return render_template("login.html")
@@ -40,13 +42,13 @@ def dashboard():
 
     student_exams = []
 
-    # Find the exam list for this student
+    # Find exams for this student
     for entry in results_data:
         if entry["username"] == username:
             student_exams = entry["exams"]
             break
 
-    # Sort NEWEST → OLDEST (reverse order of exam_id)
+    # Sort newest → oldest by exam_id
     student_exams = sorted(student_exams, key=lambda x: x["exam_id"], reverse=True)
 
     return render_template("dashboard.html", name=name, exams=student_exams)
