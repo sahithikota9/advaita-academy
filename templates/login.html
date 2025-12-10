@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — Results Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-soft">
+  <main class="centered">
+    <div class="card glass login-card">
+      <h1 class="brand">Welcome to <span class="brand-accent">Coaching Results</span></h1>
+      {% if error %}
+        <div class="alert">{{ error }}</div>
+      {% endif %}
+      <form method="post" class="login-form">
+        <label>Username (5 digits)
+          <input name="username" required pattern="\d{5}" placeholder="10000" />
+        </label>
+        <label>Password (5 digits)
+          <input name="password" type="password" required pattern="\d{5}" placeholder="20001" />
+        </label>
+        <button class="btn primary" type="submit">Sign in</button>
+      </form>
+      <p class="muted">Example: username 10000, password 20001</p>
+    </div>
+    <footer class="small muted">Local coaching centre portal — sleek purple glass UI</footer>
+  </main>
+</body>
+</html>

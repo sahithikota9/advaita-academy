@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — {{ student.name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-soft">
+  <header class="topbar">
+    <div class="container">
+      <h2 class="welcome">Welcome, <span class="name">{{ student.name }}</span></h2>
+      <div class="actions">
+        <button id="addExamBtn" class="btn">Add Exam</button>
+        <a href="{{ url_for('logout') }}" class="btn subtle">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card glass dashboard">
+      <h3 class="section-title">Results</h3>
+      <div id="exam-list">
+        {% if exams|length == 0 %}
+          <p class="muted">No exam scores yet. Click Add Exam to create one.</p>
+        {% endif %}
+        {% for e in exams %}
+        <article class="result-card">
+          <div class="result-head">
+            <div class="exam-name">{{ e.exam_name }}</div>
+            <div class="exam-date">{{ e.date[:19].replace('T',' ') if e.date }}</div>
+          </div>
+          <table class="marks-table">
+            <thead>
+              <tr><th>Subject</th><th>Marks</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Math</td><td>{{ e.math }}</td></tr>
+              <tr><td>Physics</td><td>{{ e.physics }}</td></tr>
+              <tr><td>Chemistry</td><td>{{ e.chemistry }}</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><th>Total</th><th>{{ e.total }}</th></tr>
+            </tfoot>
+          </table>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+  </main>
+
+  <!-- Add Exam Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-body card glass">
+      <h4>Add Exam Scores</h4>
+      <form id="addExamForm">
+        <label>Exam name
+          <input id="exam_name" required value="Midterm" />
+        </label>
+        <label>Math
+          <input id="math" type="number" min="0" max="100" required value="0"/>
+        </label>
+        <label>Physics
+          <input id="physics" type="number" min="0" max="100" required value="0"/>
+        </label>
+        <label>Chemistry
+          <input id="chemistry" type="number" min="0" max="100" required value="0"/>
+        </label>
+        <div class="modal-actions">
+          <button type="submit" class="btn primary">Save</button>
+          <button type="button" id="cancelBtn" class="btn subtle">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const USERNAME = "{{ session['username'] }}";
+  </script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
